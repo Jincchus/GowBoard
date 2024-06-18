@@ -96,9 +96,53 @@
 
     </header><!-- End Header -->
 
-    <div class="container body-content" id="main">
-        @RenderBody()
-    </div>
+
+    <main class="container body-content" id="main">
+
+        <section class="single-post-content">
+            <div class="container">
+                <div class="row">
+
+                    <!-- ======= My Page Sidebar ======= -->
+                    <div class="col-md-3">
+                        <div class="aside-block">
+                            <h3 class="aside-title">My Page</h3>
+                            <div>Nickname</div>
+                            <div>Email@google.com</div>
+
+                            <br>
+                            <div class="row">
+                                <a href="@Url.Action("Profile", "MyPage", new { area = "" })" style="font-size:x-large;">Profile  <i class="bi bi-chevron-right"></i></a>
+
+                            </div>
+                        </div><!-- End Video -->
+
+                        <div class="aside-block" style="margin-bottom: 300px;">
+                            <h3 class="aside-title">Categories</h3>
+                            <ul class="aside-links list-unstyled">
+                                <li><a href="@Url.Action("MyPostList", "MyPage", new { area = "" })"><i class="bi bi-chevron-right"></i> My Posts</a></li>
+                                <li><a href="@Url.Action("MyCommentList", "MyPage", new { area = "" })"><i class="bi bi-chevron-right"></i> My Comments</a></li>
+                            </ul>
+                        </div><!-- End Categories -->
+
+                        <div class="aside-block">
+                            <h3 class="aside-title"></h3>
+                            <h4 style="font-weight: bold; margin-left: 20px;"><a href="@Url.Action("Withdrawal", "MyPage", new { area = "" })"><i class="bi bi-box-arrow-right fs-5"></i>회원탈퇴</a></h4>
+                        </div><!-- End Tags -->
+
+                    </div>
+                    <!-- My Page Sidebar End-->
+
+                    <div class=col-md-9 post-content" data-aos="fade-up" id="sidebar-after">
+                        @RenderBody()
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- End #main --
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
 

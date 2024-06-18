@@ -120,7 +120,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\MyPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,9 +177,21 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Member\Register.cshtml" />
+    <Content Include="Views\Member\FindId.cshtml" />
+    <Content Include="Views\Member\LogIn.cshtml" />
+    <Content Include="Views\Member\NewPassword.cshtml" />
+    <Content Include="Views\Board\Create.cshtml" />
+    <Content Include="Views\Board\List.cshtml" />
+    <Content Include="Views\Board\DetailView.cshtml" />
+    <Content Include="Views\Board\Update.cshtml" />
+    <Content Include="Views\MyPage\Profile.cshtml" />
+    <Content Include="Views\MyPage\UpdateProfile.cshtml" />
+    <Content Include="Views\MyPage\MyCommentList.cshtml" />
+    <Content Include="Views\MyPage\MyPostList.cshtml" />
+    <Content Include="Views\Shared\_MyPageLayout.cshtml" />
+    <Content Include="Views\MyPage\Withdrawal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

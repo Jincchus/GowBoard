@@ -1,0 +1,165 @@
+@{
+    ViewBag.Title = "Board List Page";
+}
+<main id="main">
+    <section id="contact" class="contact mb-5">
+
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h1 class="site-title">Gow Board</h1>
+                    <br>
+                    <h3>자유 게시판</h3>
+                </div>
+            </div>
+
+            <!-- start table -->
+            <div class="form mt-5 php-email-form">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Photo</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Writer</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">10</th>
+                            <td>#</td>
+                            <td>
+                                <a href="@Url.Action("DetailView", "Board", new { area = "" })">여기는 제목이 들어 올 자리 입니다 ...</a><span>(12)</span>
+                            </td>
+                            <td>Writer1...</td>
+                            <td>10</td>
+                            <td>June 07TH 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">9</th>
+                            <td>#</td>
+                            <td>
+                                <a href="@Url.Action("DetailView", "Board", new { area = "" })">여기는 제목이 들어 올 자리 입니다 ...</a><span>(0)</span>
+                            </td>
+                            <td>Writer222...</td>
+                            <td>10</td>
+                            <td>June 07TH 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">8</th>
+                            <td>#</td>
+                            <td>
+                                <a href="@Url.Action("DetailView", "Board", new { area = "" })">여기는 제목이 들어 올 자리 입니다 ...</a><span>(4)</span>
+                            </td>
+                            <td>Writer3</td>
+                            <td>10</td>
+                            <td>June 07TH 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7</th>
+                            <td>#</td>
+                            <td>
+                                <a href="@Url.Action("DetailView", "Board", new { area = "" })">여기는 제목이 들어 올 자리 입니다 ...</a><span>(11)</span>
+                            </td>
+                            <td>Writer4...</td>
+                            <td>10</td>
+                            <td>June 07TH 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6</th>
+                            <td>#</td>
+                            <td>
+                                <a href="@Url.Action("DetailView", "Board", new { area = "" })">여기는 제목이 들어 올 자리 입니다 ...</a><span>(9)</span>
+                            </td>
+                            <td>Writer1...</td>
+                            <td>10</td>
+                            <td>June 07TH 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>#</td>
+                            <td>
+                                <a href="@Url.Action("DetailView", "Board", new { area = "" })">여기는 제목이 들어 올 자리 입니다 ...</a><span>(0)</span>
+                            </td>
+                            <td>Writer1...</td>
+                            <td>10</td>
+                            <td>June 07TH 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>#</td>
+                            <td>
+                                <a href="@Url.Action("DetailView", "Board", new { area = "" })">여기는 제목이 들어 올 자리 입니다 ...</a><span>(12)</span>
+                            </td>
+                            <td>Writer1...</td>
+                            <td>10</td>
+                            <td>June 07TH 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>#</td>
+                            <td>
+                                <a href="@Url.Action("DetailView", "Board", new { area = "" })">여기는 제목이 들어 올 자리 입니다 ...</a><span>(11)</span>
+                            </td>
+                            <td>Writer1...</td>
+                            <td>10</td>
+                            <td>June 07TH 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>#</td>
+                            <td>
+                                <a href="@Url.Action("DetailView", "Board", new { area = "" })">여기는 제목이 들어 올 자리 입니다 ...</a><span>(11)</span>
+                            </td>
+                            <td>Writer1...</td>
+                            <td>10</td>
+                            <td>June 07TH 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>#</td>
+                            <td>
+                                <a href="@Url.Action("DetailView", "Board", new { area = "" })">여기는 제목이 들어 올 자리 입니다 ...</a><span>(3)</span>
+                            </td>
+                            <td>Writer1...</td>
+                            <td>10</td>
+                            <td>June 07TH 2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="text-md-end mt-5">
+                    <a href="@Url.Action("Create", "Board", new {area = ""})"><button class="btn btn-dark btn-lg">글쓰기</button></a>
+                </div>
+            </div><!-- End table -->
+
+            <br>
+
+            <div class="row gy-4">
+
+                <!-- Paging -->
+                <div class="text-center py-4">
+                    <div class="custom-pagination">
+                        <a href="#" class="prev">Prevous</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#" class="next">Next</a>
+                    </div>
+                </div><!-- End Paging -->
+
+
+
+
+            </div>
+
+
+    </section>
+
+</main><!-- End #main -->
