@@ -7,19 +7,23 @@ using System.Web;
 
 namespace GowBoard.Models.Entity
 {
+    [Table("member_role_map")]
     public class MemberRoleMap
     {
         [Key]
-        [Column(Order = 1)]
+        [Column("member_id", Order = 1)]
         [StringLength(50)]
         public string MemberId { get; set; }
 
         [Key]
-        [Column(Order = 2)]
+        [Column("role_id", Order = 2)]
         public int RoleId { get; set; }
 
-        public Member Member { get; set; }
-        public Role Role { get; set; }
+        [ForeignKey("MemberId")]
+        public virtual Member Member { get; set; }
+
+        [ForeignKey("RoleId")]
+        public virtual Role Role { get; set; }
 
     }
 }

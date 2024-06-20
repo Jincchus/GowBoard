@@ -134,9 +134,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-<<<<<<< HEAD
+    <Compile Include="Models\Entity\BoardComment.cs" />
     <Compile Include="Models\Entity\BoardContent.cs" />
-    <Compile Include="Models\Context\MemberDbContext.cs" />
+    <Compile Include="Models\Context\GowBoardContext.cs" />
     <Compile Include="Models\DTO\RequestDTO\ReqMemberDTO.cs" />
     <Compile Include="Models\DTO\ResponseDTO\ResMemberDTO.cs" />
     <Compile Include="Models\Entity\BoardFile.cs" />
@@ -144,9 +144,6 @@
     <Compile Include="Models\Entity\MemberRoleMap.cs" />
     <Compile Include="Models\Entity\Role.cs" />
     <Compile Include="Models\Service\MemberService.cs" />
-=======
-    <Compile Include="Models\Member.cs" />
->>>>>>> e697bfdb66106c6e01775a8239357d0a87800b7c
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

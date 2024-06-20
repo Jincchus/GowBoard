@@ -1,5 +1,6 @@
 ﻿using GowBoard.Models;
 using GowBoard.Models.Context;
+using GowBoard.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace GowBoard.Controllers
 {
     public class MemberController : Controller
     {
-        private MemberDbContext db = new MemberDbContext();
+        private GowBoardContext db = new GowBoardContext();
 
         // GET: Member
         public ActionResult Index()
