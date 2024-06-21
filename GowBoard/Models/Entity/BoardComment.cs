@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,11 +18,17 @@ namespace GowBoard.Models.Entity
         public int BoardContentId { get; set; }
 
         [Required]
+        [StringLength(50)]
+        [Column("writer_id")]
+        public string WriterId { get; set; }
+
+        [Required]
         [Column("content", TypeName = "nvarchar(MAX)")]
         public string Content { get; set; }
 
         [Column("created_at")]
-        public DateTime CreatedAt { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         [Column("parent_comment_id")]
         public int? ParentCommentId { get; set; }
@@ -30,6 +37,11 @@ namespace GowBoard.Models.Entity
         public virtual BoardContent BoardContent { get; set; }
 
         [ForeignKey("WriterId")]
-        public virtual Member Member { get; set; }
+        public virtual Member Writer { get; set; }
+
+        [ForeignKey("ParentCommentId")]
+        public virtual BoardComment ParentComment { get; set; }
+
+        public virtual ICollection<BoardComment> Replies { get; set; }
     }
 }

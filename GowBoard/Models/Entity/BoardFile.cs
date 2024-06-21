@@ -43,7 +43,7 @@ namespace GowBoard.Models.Entity
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Column("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         [ForeignKey("BoardContentId")]
         public virtual BoardContent BoardContent { get; set; }
