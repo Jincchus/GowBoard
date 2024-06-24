@@ -1,4 +1,5 @@
 ﻿using GowBoard.Models.Entity;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
@@ -26,6 +27,34 @@ namespace GowBoard.Models.Context
                 .HasOptional(bc => bc.ParentComment)
                 .WithMany(bc => bc.Replies)
                 .HasForeignKey(bc => bc.ParentCommentId);
+
+            // Member Entity
+            modelBuilder.Entity<Member>()
+                .HasMany(m => m.BoardContentsWritten)
+                .WithRequired(b => b.Writer)
+                .HasForeignKey(b => b.WriterId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Member>()
+                .HasMany(m => m.BoardContentsModified)
+                .WithOptional(b => b.Modifier)
+                .HasForeignKey(b => b.ModifierId)
+                .WillCascadeOnDelete(false);
+
+            // BoardContent
+            modelBuilder.Entity<BoardContent>()
+                .HasRequired(b => b.Writer)
+                .WithMany(m => m.BoardContentsWritten)
+                .HasForeignKey(b => b.WriterId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<BoardContent>()
+                .HasOptional(b => b.Modifier)
+                .WithMany(m => m.BoardContentsModified)
+                .HasForeignKey(b => b.ModifierId)
+                .WillCascadeOnDelete(false);
+
+            
 
             base.OnModelCreating(modelBuilder);
         }

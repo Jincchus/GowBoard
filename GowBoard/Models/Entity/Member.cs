@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,6 +9,11 @@ namespace GowBoard.Models.Entity
     [Table("member")]
     public class Member
     {
+        public Member()
+        {
+            DeleteYn = false;
+        }
+
         [Key]
         [Required]
         [StringLength(50)]
@@ -40,17 +46,19 @@ namespace GowBoard.Models.Entity
         [Column("phone")]
         public string Phone { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        [Required]
+        [Column("created_at", TypeName = "datetime2")]
+        public DateTime CreatedAt { get; set; }
 
         [Required]
         [Column("delete_yn")]
-        public bool DeleteYn { get; set; } = false;
+        public bool DeleteYn { get; set; }
 
         [Column("deleted_at")]
         public DateTime? DeletedAt { get; set; }
 
         public virtual ICollection<MemberRoleMap> MemberRoleMap { get; set; }
+        public virtual ICollection<BoardContent> BoardContentsWritten { get; set; }
+        public virtual ICollection<BoardContent> BoardContentsModified { get; set; }
     }
 }

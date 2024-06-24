@@ -147,11 +147,40 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406240051396_InitialCreate.cs" />
+    <Compile Include="Migrations\202406240051396_InitialCreate.Designer.cs">
+      <DependentUpon>202406240051396_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406240128176_InitialCreate1.cs" />
+    <Compile Include="Migrations\202406240128176_InitialCreate1.Designer.cs">
+      <DependentUpon>202406240128176_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406240141413_InitialCreate2.cs" />
+    <Compile Include="Migrations\202406240141413_InitialCreate2.Designer.cs">
+      <DependentUpon>202406240141413_InitialCreate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406240149210_InitialCreate3.cs" />
+    <Compile Include="Migrations\202406240149210_InitialCreate3.Designer.cs">
+      <DependentUpon>202406240149210_InitialCreate3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406240206546_AddDefaultCreatedAt.cs" />
+    <Compile Include="Migrations\202406240206546_AddDefaultCreatedAt.Designer.cs">
+      <DependentUpon>202406240206546_AddDefaultCreatedAt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406240226148_InitialCreate4.cs" />
+    <Compile Include="Migrations\202406240226148_InitialCreate4.Designer.cs">
+      <DependentUpon>202406240226148_InitialCreate4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406240408155_AddDefaultCreatedAt1.cs" />
+    <Compile Include="Migrations\202406240408155_AddDefaultCreatedAt1.Designer.cs">
+      <DependentUpon>202406240408155_AddDefaultCreatedAt1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DTO\ResponseDTO\RegisterResult.cs" />
     <Compile Include="Models\Entity\BoardComment.cs" />
     <Compile Include="Models\Entity\BoardContent.cs" />
     <Compile Include="Models\Context\GowBoardContext.cs" />
     <Compile Include="Models\DTO\RequestDTO\ReqMemberDTO.cs" />
-    <Compile Include="Models\DTO\ResponseDTO\ResMemberDTO.cs" />
     <Compile Include="Models\Entity\BoardFile.cs" />
     <Compile Include="Models\Entity\Member.cs" />
     <Compile Include="Models\Entity\MemberRoleMap.cs" />
@@ -197,6 +226,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\register-ajax.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -253,6 +283,29 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202406240051396_InitialCreate.resx">
+      <DependentUpon>202406240051396_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406240128176_InitialCreate1.resx">
+      <DependentUpon>202406240128176_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406240141413_InitialCreate2.resx">
+      <DependentUpon>202406240141413_InitialCreate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406240149210_InitialCreate3.resx">
+      <DependentUpon>202406240149210_InitialCreate3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406240206546_AddDefaultCreatedAt.resx">
+      <DependentUpon>202406240206546_AddDefaultCreatedAt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406240226148_InitialCreate4.resx">
+      <DependentUpon>202406240226148_InitialCreate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406240408155_AddDefaultCreatedAt1.resx">
+      <DependentUpon>202406240408155_AddDefaultCreatedAt1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,6 +1,7 @@
 ﻿using GowBoard.Models;
 using GowBoard.Models.Context;
 using GowBoard.Models.DTO.RequestDTO;
+using GowBoard.Models.DTO.ResponseDTO;
 using GowBoard.Models.Entity;
 using GowBoard.Models.Service.Interface;
 using System;
@@ -42,24 +43,16 @@ namespace GowBoard.Controllers
 
         // Post: Member/Register
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Register(ReqMemberDTO member)
         {
-            if(ModelState.IsValid)
+            var registered = _memberService.RegisterMember(member);
+            if (registered.Success)
             {
-                bool isRegistered = _memberService.RegisterMember(member);
-                if (isRegistered)
-                {
-                    return RedirectToAction("RegisterSuccess");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Member Info is already taken");
-                }
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
             }
 
-            // TODO: 회원가입이 유효하지 않았을 경우 return 변경
-            return View(member); 
+            return Json(new { success = false, message = registered.Message }, JsonRequestBehavior.AllowGet);
+    
         }
 
 

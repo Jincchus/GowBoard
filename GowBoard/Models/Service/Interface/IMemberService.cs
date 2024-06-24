@@ -1,4 +1,5 @@
 ﻿using GowBoard.Models.DTO.RequestDTO;
+using GowBoard.Models.DTO.ResponseDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace GowBoard.Models.Service.Interface
 {
     public interface IMemberService
     {
-        bool RegisterMember(ReqMemberDTO member);
+        RegisterResult RegisterMember(ReqMemberDTO member);
     }
 }
