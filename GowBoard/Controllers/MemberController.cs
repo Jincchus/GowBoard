@@ -1,22 +1,13 @@
-﻿using GowBoard.Models;
-using GowBoard.Models.Context;
+﻿using GowBoard.Models.Context;
 using GowBoard.Models.DTO.RequestDTO;
-using GowBoard.Models.DTO.ResponseDTO;
-using GowBoard.Models.Entity;
 using GowBoard.Models.Service.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GowBoard.Controllers
 {
     public class MemberController : Controller
     {
-        // private GowBoardContext db = new GowBoardContext();
-
-        private readonly GowBoardContext _db;
         private readonly IMemberService _memberService;
 
         public MemberController() { }
@@ -25,7 +16,7 @@ namespace GowBoard.Controllers
         {
             _memberService = memberService;
         }
-        
+
 
         // GET: Member
         public ActionResult Index()
@@ -34,31 +25,46 @@ namespace GowBoard.Controllers
         }
 
         // GET: Member/Register
-        // 회원가입
+        // 회원가입 페이지
         [HttpGet]
-        public ActionResult Register() 
-        { 
+        public ActionResult Register()
+        {
             return View();
         }
 
         // Post: Member/Register
+        // 회원가입
         [HttpPost]
         public ActionResult Register(ReqMemberDTO member)
         {
-            var registered = _memberService.RegisterMember(member);
-            if (registered.Success)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
-            }
 
-            return Json(new { success = false, message = registered.Message }, JsonRequestBehavior.AllowGet);
-    
+            var registered = _memberService.RegisterMember(member);
+
+            return Json(new { success= registered.Success, message = registered.Message });
+
         }
 
+        // POST: MEMBER/DuplicatedCheckId
+        // 아이디 중복검사
+        [HttpPost]
+        public ActionResult DuplicatedCheckId(string memberId)
+        {
+            var isDuplicate = _memberService.DuplicatedCheckId(memberId);
+            return Json(new { success = isDuplicate.Success, message = isDuplicate.Message});
+        }
+
+        // POST: MEMBER/DuplicatedCheckNickname
+        // 아이디 중복검사
+        [HttpPost]
+        public ActionResult DuplicatedCheckNickname(string nickname)
+        {
+            var isDuplicate = _memberService.DuplicatedCheckNickname(nickname);
+            return Json(new { success = isDuplicate.Success, message = isDuplicate.Message });
+        }
 
         // GET: Member/LogIn
         // 로그인
-        public ActionResult LogIn() 
+        public ActionResult LogIn()
         {
             return View();
         }
@@ -87,7 +93,7 @@ namespace GowBoard.Controllers
 
         // GET: Member/NewPassword
         // 비밀번호 재설정
-        public ActionResult NewPassword() 
+        public ActionResult NewPassword()
         {
             return View();
         }
