@@ -54,7 +54,7 @@ namespace GowBoard.Controllers
         }
 
         // POST: MEMBER/DuplicatedCheckNickname
-        // 아이디 중복검사
+        // 닉네임 중복검사
         [HttpPost]
         public ActionResult DuplicatedCheckNickname(string nickname)
         {

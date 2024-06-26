@@ -3,19 +3,23 @@ using GowBoard.Models.DTO.RequestDTO;
 using GowBoard.Models.DTO.ResponseDTO;
 using GowBoard.Models.Entity;
 using GowBoard.Models.Service.Interface;
+using GowBoard.Models.Service.Utility;
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 
 namespace GowBoard.Models.Service
 {
     public class MemberService : IMemberService
     {
         private readonly GowBoardContext _context;
+        private readonly SecurityService _securityService;
 
         public MemberService(GowBoardContext context)
         {
             _context = context;
+            _securityService = new SecurityService();
         }
 
         public RegisterResult RegisterMember(ReqMemberDTO memberDto)
@@ -33,33 +37,30 @@ namespace GowBoard.Models.Service
                 || string.IsNullOrEmpty(memberDto.Password))
             {
                 result.Message = "빈 값은 입력 될 수 없습니다. 입력된 값을 확인해 주세요.";
-
-
                 return result;
             }
 
 
             var memberContext = _context.Members;
-
             if (memberContext.Any(m => m.MemberId == memberDto.Memberid || m.Nickname == memberDto.Nickname))
             {
                 result.Message = "아이디 혹은 닉네임 중복 확인이 필요합니다.";
-
                 return result;
             }
-
             if (memberContext.Any(m => m.Email == memberDto.Email))
             {
                 result.Message = "중복된 이메일입니다.";
+                return result;
             }
-
 
             try
             {
+                string hashedPassword = _securityService.HashPassword(memberDto.Password);
+
                 var member = new Member
                 {
                     MemberId = memberDto.Memberid,
-                    Password = memberDto.Password,
+                    Password = hashedPassword,
                     Name = memberDto.Name,
                     Email = memberDto.Email,
                     Nickname = memberDto.Nickname,
@@ -99,7 +100,7 @@ namespace GowBoard.Models.Service
             }
 
             result.Success = true;
-            result.Message = "사용 가능한 아이디 입니다";
+            result.Message = "사용 가능한 아이디입니다";
 
             return result;
         }

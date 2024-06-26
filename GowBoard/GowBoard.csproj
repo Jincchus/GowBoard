@@ -175,6 +175,14 @@
     <Compile Include="Migrations\202406240408155_AddDefaultCreatedAt1.Designer.cs">
       <DependentUpon>202406240408155_AddDefaultCreatedAt1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406260630405_UpdatePrimaryKey.cs" />
+    <Compile Include="Migrations\202406260630405_UpdatePrimaryKey.Designer.cs">
+      <DependentUpon>202406260630405_UpdatePrimaryKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406260708073_MembePrimaryKey.cs" />
+    <Compile Include="Migrations\202406260708073_MembePrimaryKey.Designer.cs">
+      <DependentUpon>202406260708073_MembePrimaryKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DTO\ResponseDTO\RegisterResult.cs" />
     <Compile Include="Models\Entity\BoardComment.cs" />
@@ -187,6 +195,7 @@
     <Compile Include="Models\Entity\Role.cs" />
     <Compile Include="Models\Service\Interface\IMemberService.cs" />
     <Compile Include="Models\Service\MemberService.cs" />
+    <Compile Include="Models\Service\Utility\SecurityService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +316,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202406240408155_AddDefaultCreatedAt1.resx">
       <DependentUpon>202406240408155_AddDefaultCreatedAt1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406260630405_UpdatePrimaryKey.resx">
+      <DependentUpon>202406260630405_UpdatePrimaryKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406260708073_MembePrimaryKey.resx">
+      <DependentUpon>202406260708073_MembePrimaryKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

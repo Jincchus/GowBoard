@@ -9,8 +9,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "GowBoard.Models.Context.GowBoardContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(GowBoard.Models.Context.GowBoardContext context)
