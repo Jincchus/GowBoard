@@ -16,7 +16,6 @@ idCheckBtn.addEventListener('click', function () {
         body: JSON.stringify({ MemberId: memberId })
     })
         .then((response) => {
-            debugger
             if (!response.ok) {
                 throw new Error('Network response was not ok')
             }
@@ -28,7 +27,6 @@ idCheckBtn.addEventListener('click', function () {
         })
 
         .catch(error => {
-            debugger
             console.error('Error:', error)
             alert('catch error : ', error.message)
             idChecked = false;
@@ -58,7 +56,6 @@ nicknameCheckBtn.addEventListener('click', function () {
         })
 
         .catch(error => {
-            debugger
             console.error('Error:', error)
             alert('catch error : ', error.message)
             nicknameChecked = false;

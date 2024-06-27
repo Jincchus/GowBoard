@@ -3,11 +3,11 @@ using System.Text;
 
 namespace GowBoard.Models.Service.Utility
 {
-    public class SecurityService
+    public class PasswordHash
     {
         public string HashPassword(string password)
         {
-            using(SHA256 sha256 = SHA256.Create())
+            using (SHA256 sha256 = SHA256.Create())
             {
                 byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
 

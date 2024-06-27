@@ -1,5 +1,4 @@
 ﻿using GowBoard.Models.Entity;
-using System;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
@@ -54,7 +53,7 @@ namespace GowBoard.Models.Context
                 .HasForeignKey(b => b.ModifierId)
                 .WillCascadeOnDelete(false);
 
-            
+
 
             base.OnModelCreating(modelBuilder);
         }

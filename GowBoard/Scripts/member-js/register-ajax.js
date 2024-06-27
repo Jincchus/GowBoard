@@ -17,6 +17,11 @@
             return;
         }
 
+        if (!onAuthNumberValidated()) {
+            alert('이메일 인증을 확인해주세요.');
+            return;
+        }
+
         if (!canProceedToRegister()) {
             return ;
         }

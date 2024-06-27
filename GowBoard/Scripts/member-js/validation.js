@@ -120,4 +120,10 @@ function validateCheckFields() {
     return validationResults
 }
 
+function validateField(fieldName) {
+    const field = fields[fieldName];
+    return validateCheck(field);
+}
+
+
 validateCheckFields();

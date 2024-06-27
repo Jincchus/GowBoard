@@ -1,5 +1,6 @@
 ﻿using GowBoard.Models.Context;
 using GowBoard.Models.DTO.RequestDTO;
+using GowBoard.Models.Service;
 using GowBoard.Models.Service.Interface;
 using System;
 using System.Web.Mvc;
@@ -67,6 +68,26 @@ namespace GowBoard.Controllers
         public ActionResult LogIn()
         {
             return View();
+        }
+
+        // POST: Member/SendAuthenticationEmail
+        // 이메일 인증번호 전송
+        public ActionResult SendAuthenticationEmail(string email)
+        {
+
+
+            var isDuplicate = _memberService.DuplicatedCheckEmail(email);
+            if (!isDuplicate.Success)
+            {
+                return Json(new {success = isDuplicate.Success, message = isDuplicate.Message});
+            }
+
+            var result = _memberService.SendAuthenticationEmail(email);
+            bool emailSent = result.Item1;
+            string authNumber = result.Item2;
+
+
+            return Json(new { success = emailSent, authNumber = authNumber });
         }
 
         //[HttpPost]
