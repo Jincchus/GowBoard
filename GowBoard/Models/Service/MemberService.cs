@@ -6,8 +6,10 @@ using GowBoard.Models.Service.Interface;
 using GowBoard.Models.Service.Utility;
 using GowBoard.Utility;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+
 
 namespace GowBoard.Models.Service
 {
@@ -22,6 +24,7 @@ namespace GowBoard.Models.Service
             _passwordHash = new PasswordHash();
         }
 
+
         public RegisterResult RegisterMember(ReqRegisterrDTO registerDto)
         {
             var result = new RegisterResult
@@ -29,6 +32,7 @@ namespace GowBoard.Models.Service
                 Success = false,
                 Message = "회원가입에 실패하였습니다. 다시 시도하여주십시오"
             };
+
 
             if (string.IsNullOrEmpty(registerDto.Memberid)
                 || string.IsNullOrEmpty(registerDto.Name)
@@ -55,6 +59,7 @@ namespace GowBoard.Models.Service
 
             try
             {
+
                 string hashedPassword = _passwordHash.HashPassword(registerDto.Password);
 
                 var member = new Member
@@ -69,6 +74,22 @@ namespace GowBoard.Models.Service
                 };
 
                 _context.Members.Add(member);
+                _context.SaveChanges();
+
+                var memberRole = _context.Roles.FirstOrDefault(r => r.RoleName == "member");
+                if(memberRole == null)
+                {
+                    memberRole = new Role { CreatedAt = DateTime.Now };
+                    _context.Roles.Add(memberRole);
+                    _context.SaveChanges();
+                }
+
+                var memberRoleMap = new MemberRoleMap
+                {
+                    MemberId = member.MemberId,
+                    RoleId = memberRole.RoleId
+                };
+                _context.MemberRoleMaps.Add(memberRoleMap);
                 _context.SaveChanges();
 
                 result.Success = true;

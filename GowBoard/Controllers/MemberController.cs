@@ -36,10 +36,12 @@ namespace GowBoard.Controllers
         // Post: Member/Register
         // 회원가입
         [HttpPost]
+
         public ActionResult Register(ReqRegisterrDTO registerDto)
         {
 
             var registered = _memberService.RegisterMember(registerDto);
+
 
             return Json(new { success = registered.Success, message = registered.Message });
 
@@ -63,6 +65,7 @@ namespace GowBoard.Controllers
             return Json(new { success = isDuplicate.Success, message = isDuplicate.Message });
         }
 
+
         // POST: Member/SendAuthenticationEmail
         // 이메일 인증번호 전송
         public ActionResult SendAuthenticationEmail(string email)
@@ -85,10 +88,13 @@ namespace GowBoard.Controllers
 
         // GET: Member/LogIn
         // 로그인
+
+        [HttpGet]
         public ActionResult LogIn()
         {
             return View();
         }
+
 
         // POST: Member/LogIn
         // 로그인
@@ -113,6 +119,7 @@ namespace GowBoard.Controllers
         {
             Session.Remove("MemberId");
             return RedirectToAction("LogIn", "Member");
+
         }
 
         // GET: Member/FindId
