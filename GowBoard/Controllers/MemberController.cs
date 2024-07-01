@@ -37,7 +37,7 @@ namespace GowBoard.Controllers
         // 회원가입
         [HttpPost]
 
-        public ActionResult Register(ReqRegisterrDTO registerDto)
+        public ActionResult Register(ReqRegisterDTO registerDto)
         {
 
             var registered = _memberService.RegisterMember(registerDto);
@@ -99,7 +99,7 @@ namespace GowBoard.Controllers
         // POST: Member/LogIn
         // 로그인
         [HttpPost]
-        public ActionResult LogIn(reqLoginDto loginDto)
+        public ActionResult LogIn(ReqLoginDTO loginDto)
         {
             var member = _memberService.Login(loginDto);
             if (member == null)

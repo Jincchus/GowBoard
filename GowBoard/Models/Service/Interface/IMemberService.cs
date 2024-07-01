@@ -9,7 +9,7 @@ namespace GowBoard.Models.Service.Interface
 {
     public interface IMemberService
     {
-        RegisterResult RegisterMember(ReqRegisterrDTO registerDto);
+        RegisterResult RegisterMember(ReqRegisterDTO registerDto);
 
         RegisterResult DuplicatedCheckId(string memberId);
 
@@ -19,11 +19,11 @@ namespace GowBoard.Models.Service.Interface
 
         Tuple<bool, string> SendAuthenticationEmail(string email);
 
-        Member Login(reqLoginDto loginDto);
+        Member Login(ReqLoginDTO loginDto);
         
         Member GetMemberById(string memberId);
 
-        bool VerifyPassword(Member member, string password);
+        bool VerifyCredentials(string memberId, string password);
         void DeleteMember(string memberId);
 
 

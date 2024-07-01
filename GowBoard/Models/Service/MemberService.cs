@@ -25,7 +25,7 @@ namespace GowBoard.Models.Service
         }
 
 
-        public RegisterResult RegisterMember(ReqRegisterrDTO registerDto)
+        public RegisterResult RegisterMember(ReqRegisterDTO registerDto)
         {
             var result = new RegisterResult
             {
@@ -182,7 +182,7 @@ namespace GowBoard.Models.Service
             return Tuple.Create(emailSent, authNumber);
         }
 
-        public Member Login(reqLoginDto loginDto)
+        public Member Login(ReqLoginDTO loginDto)
         {
 
             var member = _context.Members.FirstOrDefault( m => m.MemberId.Equals(loginDto.MemberId));
@@ -202,6 +202,25 @@ namespace GowBoard.Models.Service
         public Member GetMemberById(string memberId)
         {
             return _context.Members.FirstOrDefault(m => m.MemberId.Equals(memberId));
+        }
+
+
+        // 회원 정보 업데이트
+
+
+
+        // 회원 탈퇴
+        public bool VerifyCredentials(string memberId, string password)
+        {
+            // TODO: 비밀번호 => 해시처리, ==X EQUALS처리 
+            var member = _context.Members.FirstOrDefault();
+            
+            return false;
+        }
+
+        public void DeleteMember(string memberId)
+        {
+            // TODO: 삭제는 SOFT DELETE 처리 예정, 이후 로그인 시 DELETE_YN구분 후 'Y'일 때 로그인 대신 회원탈퇴 처리중인 ID ALERT 처리
         }
 
     }

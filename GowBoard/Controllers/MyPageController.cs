@@ -118,12 +118,8 @@ namespace GowBoard.Controllers
         public ActionResult Withdrawal(string password)
         {
             string memberId = Session["MemberId"].ToString();
-            var member = _memberService.GetMemberById(memberId);
-            bool isPasswordCorrect = _memberService.VerifyPassword(member, password);
-            if (!isPasswordCorrect)
-            {
+            _memberService.VerifyCredentials(memberId, password);
 
-            }
             _memberService.DeleteMember(memberId);
             return RedirectToAction("Index", "Home");
         }
