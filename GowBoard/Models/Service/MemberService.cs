@@ -6,7 +6,9 @@ using GowBoard.Models.Service.Interface;
 using GowBoard.Models.Service.Utility;
 using GowBoard.Utility;
 using System;
+using System.Data.Entity;
 using System.Linq;
+using System.Web.UI;
 
 namespace GowBoard.Models.Service
 {
@@ -21,7 +23,7 @@ namespace GowBoard.Models.Service
             _passwordHash = new PasswordHash();
         }
 
-        public RegisterResult RegisterMember(ReqMemberDTO memberDto)
+        public RegisterResult RegisterMember(ReqRegisterDTO register)
         {
             var result = new RegisterResult
             {
@@ -29,11 +31,11 @@ namespace GowBoard.Models.Service
                 Message = "회원가입에 실패하였습니다. 다시 시도하여주십시오"
             };
 
-            if (string.IsNullOrEmpty(memberDto.Memberid)
-                || string.IsNullOrEmpty(memberDto.Name)
-                || string.IsNullOrEmpty(memberDto.Nickname)
-                || string.IsNullOrEmpty(memberDto.Email)
-                || string.IsNullOrEmpty(memberDto.Password))
+            if (string.IsNullOrEmpty(register.Memberid)
+                || string.IsNullOrEmpty(register.Name)
+                || string.IsNullOrEmpty(register.Nickname)
+                || string.IsNullOrEmpty(register.Email)
+                || string.IsNullOrEmpty(register.Password))
             {
                 result.Message = "빈 값은 입력 될 수 없습니다. 입력된 값을 확인해 주세요.";
                 return result;
@@ -41,12 +43,12 @@ namespace GowBoard.Models.Service
 
 
             var memberContext = _context.Members;
-            if (memberContext.Any(m => m.MemberId == memberDto.Memberid || m.Nickname == memberDto.Nickname))
+            if (memberContext.Any(m => m.MemberId == register.Memberid || m.Nickname == register.Nickname))
             {
                 result.Message = "아이디 혹은 닉네임 중복 확인이 필요합니다.";
                 return result;
             }
-            if (memberContext.Any(m => m.Email == memberDto.Email))
+            if (memberContext.Any(m => m.Email == register.Email))
             {
                 result.Message = "중복된 이메일입니다.";
                 return result;
@@ -54,20 +56,36 @@ namespace GowBoard.Models.Service
 
             try
             {
-                string hashedPassword = _passwordHash.HashPassword(memberDto.Password);
+                string hashedPassword = _passwordHash.HashPassword(register.Password);
 
                 var member = new Member
                 {
-                    MemberId = memberDto.Memberid,
+                    MemberId = register.Memberid,
                     Password = hashedPassword,
-                    Name = memberDto.Name,
-                    Email = memberDto.Email,
-                    Nickname = memberDto.Nickname,
-                    Phone = memberDto.Phone,
+                    Name = register.Name,
+                    Email = register.Email,
+                    Nickname = register.Nickname,
+                    Phone = register.Phone,
                     CreatedAt = DateTime.Now // TODO : DATABASE Default : GETDATE();
                 };
 
                 _context.Members.Add(member);
+                _context.SaveChanges();
+
+                var memberRole = _context.Roles.FirstOrDefault(r => r.RoleName == "member");
+                if(memberRole == null)
+                {
+                    memberRole = new Role { CreatedAt = DateTime.Now };
+                    _context.Roles.Add(memberRole);
+                    _context.SaveChanges();
+                }
+
+                var memberRoleMap = new MemberRoleMap
+                {
+                    MemberId = member.MemberId,
+                    RoleId = memberRole.RoleId
+                };
+                _context.MemberRoleMaps.Add(memberRoleMap);
                 _context.SaveChanges();
 
                 result.Success = true;
@@ -158,6 +176,20 @@ namespace GowBoard.Models.Service
             bool emailSent = EmailUtility.SendEmail(email, subject, body);
 
             return Tuple.Create(emailSent, authNumber);
+        }
+
+        public RegisterResult Login(ReqLoginDTO login)
+        {
+            var loginMember = _context.Members.FirstOrDefaultAsync(m => m.MemberId == login.MemberId && m.Password == login.Password);
+
+            if (loginMember != null) 
+            {
+                Session["MemberId"] = loginMember.MemberId;
+                return RedirectToAction("I")
+            }
+
+
+            return null;
         }
     }
 }

@@ -183,6 +183,14 @@
     <Compile Include="Migrations\202406260708073_MembePrimaryKey.Designer.cs">
       <DependentUpon>202406260708073_MembePrimaryKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406290430272_[Home].cs" />
+    <Compile Include="Migrations\202406290430272_[Home].Designer.cs">
+      <DependentUpon>202406290430272_[Home].cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406290455550_RoleChange.cs" />
+    <Compile Include="Migrations\202406290455550_RoleChange.Designer.cs">
+      <DependentUpon>202406290455550_RoleChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DTO\ResponseDTO\RegisterResult.cs" />
     <Compile Include="Models\Entity\BoardComment.cs" />
@@ -325,6 +333,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202406260708073_MembePrimaryKey.resx">
       <DependentUpon>202406260708073_MembePrimaryKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406290430272_[Home].resx">
+      <DependentUpon>202406290430272_[Home].cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406290455550_RoleChange.resx">
+      <DependentUpon>202406290455550_RoleChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

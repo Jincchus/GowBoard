@@ -36,10 +36,10 @@ namespace GowBoard.Controllers
         // Post: Member/Register
         // 회원가입
         [HttpPost]
-        public ActionResult Register(ReqMemberDTO member)
+        public ActionResult Register(ReqRegisterDTO register)
         {
 
-            var registered = _memberService.RegisterMember(member);
+            var registered = _memberService.RegisterMember(register);
 
             return Json(new { success= registered.Success, message = registered.Message });
 
@@ -63,12 +63,6 @@ namespace GowBoard.Controllers
             return Json(new { success = isDuplicate.Success, message = isDuplicate.Message });
         }
 
-        // GET: Member/LogIn
-        // 로그인
-        public ActionResult LogIn()
-        {
-            return View();
-        }
 
         // POST: Member/SendAuthenticationEmail
         // 이메일 인증번호 전송
@@ -79,7 +73,7 @@ namespace GowBoard.Controllers
             var isDuplicate = _memberService.DuplicatedCheckEmail(email);
             if (!isDuplicate.Success)
             {
-                return Json(new {success = isDuplicate.Success, message = isDuplicate.Message});
+                return Json(new { success = isDuplicate.Success, message = isDuplicate.Message });
             }
 
             var result = _memberService.SendAuthenticationEmail(email);
@@ -90,20 +84,21 @@ namespace GowBoard.Controllers
             return Json(new { success = emailSent, authNumber = authNumber });
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult LogIn(Member member) 
-        //{
-        //    var logInMember = _db.Members.FirstOrDefault(u => u.MemberId == member.MemberId && u.Password == member.Password);
-        //    if (logInMember != null)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
+        // GET: Member/LogIn
+        // 로그인
+        [HttpGet]
+        public ActionResult LogIn()
+        {
+            return View();
+        }
 
-        //    ModelState.AddModelError("", "Invalid username or password");
-        //    return View(member);
-        //}
-
+        // POST: Member/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogIn(ReqLoginDTO member) 
+        {
+            return View(member);
+        }
 
         // GET: Member/FindId
         // 아이디 찾기

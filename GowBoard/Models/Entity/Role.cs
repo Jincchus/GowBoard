@@ -8,6 +8,11 @@ namespace GowBoard.Models.Entity
     [Table("role")]
     public class Role
     {
+        public Role() 
+        {
+            RoleName = "member";
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("role_id")]
@@ -18,9 +23,9 @@ namespace GowBoard.Models.Entity
         [Column("role_name")]
         public string RoleName { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [Required]
         [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; }
 
         public virtual ICollection<MemberRoleMap> MemberRoleMap { get; set; }
     }
