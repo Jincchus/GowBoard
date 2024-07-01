@@ -192,11 +192,12 @@
       <DependentUpon>202406290455550_RoleChange.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DTO\RequestDTO\reqLoginDto.cs" />
     <Compile Include="Models\DTO\ResponseDTO\RegisterResult.cs" />
     <Compile Include="Models\Entity\BoardComment.cs" />
     <Compile Include="Models\Entity\BoardContent.cs" />
     <Compile Include="Models\Context\GowBoardContext.cs" />
-    <Compile Include="Models\DTO\RequestDTO\ReqMemberDTO.cs" />
+    <Compile Include="Models\DTO\RequestDTO\ReqRegisterrDTO.cs" />
     <Compile Include="Models\Entity\BoardFile.cs" />
     <Compile Include="Models\Entity\Member.cs" />
     <Compile Include="Models\Entity\MemberRoleMap.cs" />

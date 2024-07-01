@@ -72,15 +72,31 @@
 
             <div class="position-relative">
                 <div class="text-center">
-                    <a href="@Url.Action("Register", "Member", new { area = "" })">
-                        <button class="btn btn-outline-dark" style="width:100px">회원가입</button>
-                    </a>
-                    <a href="@Url.Action("LogIn", "Member", new { area = "" })">
-                        <button class="btn btn-dark" style="width:100px">로그인</button>
-                    </a>
-                </div>
-                <i class="bi bi-list mobile-nav-toggle"></i>
 
+                    @if (Session["MemberId"] == null)
+                    {
+                        <a href="@Url.Action("Register", "Member", new { area = "" })">
+                            <button class="btn btn-outline-dark" style="width:100px">회원가입</button>
+                        </a>
+
+                        <a href="@Url.Action("LogIn", "Member", new { area = "" })">
+                            <button class="btn btn-dark" style="width:100px">로그인</button>
+                        </a>
+                    }
+                    else
+                    {
+
+                        <a href="@Url.Action("Profile", "MyPage", new { area = "" })">
+                            <i class="bi bi-person-circle" style="font-size:40px; margin-right: 20px"></i>
+
+                        </a>
+                    }
+
+                </div>
+
+                <div class="text-center">
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </div>
                 <!-- ======= Search Form ======= -->
                 <div class="search-form-wrap js-search-form-wrap">
                     <form action="search-result.html" class="search-form">
@@ -234,7 +250,6 @@
     <script src="~/Content/vendor/aos/aos.js"></script>
     <!--
     <script src="~/Content/vendor/php-email-form/validate.js"></script>-->
-
     <!-- Template Main JS File -->
     <script src="~/Scripts/main.js"></script>
 
@@ -251,6 +266,15 @@
 
     </script>
 
+    <script>
+    window.onload = function () {
+        var errorMessage = '@ViewBag.ErrorMessage';
+        if (errorMessage) {
+            alert(errorMessage);
+        }
+    }
+
+    </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

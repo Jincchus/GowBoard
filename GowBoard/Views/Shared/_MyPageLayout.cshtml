@@ -1,6 +1,7 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@Model Member
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;" />
     <meta charset="utf-8">
@@ -72,15 +73,31 @@
 
             <div class="position-relative">
                 <div class="text-center">
-                    <a href="@Url.Action("Register", "Member", new { area = "" })">
-                        <button class="btn btn-outline-dark" style="width:100px">회원가입</button>
-                    </a>
-                    <a href="@Url.Action("LogIn", "Member", new { area = "" })">
-                        <button class="btn btn-dark" style="width:100px">로그인</button>
-                    </a>
-                </div>
-                <i class="bi bi-list mobile-nav-toggle"></i>
 
+                    @if (Session["MemberId"] == null)
+                    {
+                        <a href="@Url.Action("Register", "Member", new { area = "" })">
+                            <button class="btn btn-outline-dark" style="width:100px">회원가입</button>
+                        </a>
+
+                        <a href="@Url.Action("LogIn", "Member", new { area = "" })">
+                            <button class="btn btn-dark" style="width:100px">로그인</button>
+                        </a>
+                    }
+                    else
+                    {
+
+                        <a href="@Url.Action("Profile", "MyPage", new { area = "" })">
+                            <i class="bi bi-person-circle" style="font-size:40px; margin-right: 20px"></i>
+
+                        </a>
+                    }
+
+                </div>
+
+                <div class="text-center">
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </div>
                 <!-- ======= Search Form ======= -->
                 <div class="search-form-wrap js-search-form-wrap">
                     <form action="search-result.html" class="search-form">
@@ -107,12 +124,12 @@
                     <div class="col-md-3">
                         <div class="aside-block">
                             <h3 class="aside-title">My Page</h3>
-                            <div>Nickname</div>
-                            <div>Email@google.com</div>
+                            <div>@Model.Nickname</div>
+                            <div>@Model.Email</div>
 
                             <br>
                             <div class="row">
-                                <a href="@Url.Action("Profile", "MyPage", new { area = "" })" style="font-size:x-large;">Profile  <i class="bi bi-chevron-right"></i></a>
+                                <a href="@Url.Action("Logout", "Member", new { area = "" })" style="font-size:x-large;">Logout  <i class="bi bi-chevron-right"></i></a>
 
                             </div>
                         </div><!-- End Video -->
@@ -120,6 +137,7 @@
                         <div class="aside-block" style="margin-bottom: 300px;">
                             <h3 class="aside-title">Categories</h3>
                             <ul class="aside-links list-unstyled">
+                                <li><a href="@Url.Action("Profile", "MyPage", new { area = "" })"><i class="bi bi-chevron-right"></i> My Profile</a></li>
                                 <li><a href="@Url.Action("MyPostList", "MyPage", new { area = "" })"><i class="bi bi-chevron-right"></i> My Posts</a></li>
                                 <li><a href="@Url.Action("MyCommentList", "MyPage", new { area = "" })"><i class="bi bi-chevron-right"></i> My Comments</a></li>
                             </ul>

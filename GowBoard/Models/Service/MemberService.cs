@@ -8,7 +8,8 @@ using GowBoard.Utility;
 using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Web.UI;
+using System.Web.Mvc;
+
 
 namespace GowBoard.Models.Service
 {
@@ -23,7 +24,8 @@ namespace GowBoard.Models.Service
             _passwordHash = new PasswordHash();
         }
 
-        public RegisterResult RegisterMember(ReqRegisterDTO register)
+
+        public RegisterResult RegisterMember(ReqRegisterrDTO registerDto)
         {
             var result = new RegisterResult
             {
@@ -31,11 +33,12 @@ namespace GowBoard.Models.Service
                 Message = "회원가입에 실패하였습니다. 다시 시도하여주십시오"
             };
 
-            if (string.IsNullOrEmpty(register.Memberid)
-                || string.IsNullOrEmpty(register.Name)
-                || string.IsNullOrEmpty(register.Nickname)
-                || string.IsNullOrEmpty(register.Email)
-                || string.IsNullOrEmpty(register.Password))
+
+            if (string.IsNullOrEmpty(registerDto.Memberid)
+                || string.IsNullOrEmpty(registerDto.Name)
+                || string.IsNullOrEmpty(registerDto.Nickname)
+                || string.IsNullOrEmpty(registerDto.Email)
+                || string.IsNullOrEmpty(registerDto.Password))
             {
                 result.Message = "빈 값은 입력 될 수 없습니다. 입력된 값을 확인해 주세요.";
                 return result;
@@ -43,12 +46,12 @@ namespace GowBoard.Models.Service
 
 
             var memberContext = _context.Members;
-            if (memberContext.Any(m => m.MemberId == register.Memberid || m.Nickname == register.Nickname))
+            if (memberContext.Any(m => m.MemberId.Equals(registerDto.Memberid) || m.Nickname.Equals(registerDto.Nickname)))
             {
                 result.Message = "아이디 혹은 닉네임 중복 확인이 필요합니다.";
                 return result;
             }
-            if (memberContext.Any(m => m.Email == register.Email))
+            if (memberContext.Any(m => m.Email == registerDto.Email))
             {
                 result.Message = "중복된 이메일입니다.";
                 return result;
@@ -56,16 +59,17 @@ namespace GowBoard.Models.Service
 
             try
             {
-                string hashedPassword = _passwordHash.HashPassword(register.Password);
+
+                string hashedPassword = _passwordHash.HashPassword(registerDto.Password);
 
                 var member = new Member
                 {
-                    MemberId = register.Memberid,
+                    MemberId = registerDto.Memberid,
                     Password = hashedPassword,
-                    Name = register.Name,
-                    Email = register.Email,
-                    Nickname = register.Nickname,
-                    Phone = register.Phone,
+                    Name = registerDto.Name,
+                    Email = registerDto.Email,
+                    Nickname = registerDto.Nickname,
+                    Phone = registerDto.Phone,
                     CreatedAt = DateTime.Now // TODO : DATABASE Default : GETDATE();
                 };
 
@@ -178,18 +182,28 @@ namespace GowBoard.Models.Service
             return Tuple.Create(emailSent, authNumber);
         }
 
-        public RegisterResult Login(ReqLoginDTO login)
+        public Member Login(reqLoginDto loginDto)
         {
-            var loginMember = _context.Members.FirstOrDefaultAsync(m => m.MemberId == login.MemberId && m.Password == login.Password);
 
-            if (loginMember != null) 
+            var member = _context.Members.FirstOrDefault( m => m.MemberId.Equals(loginDto.MemberId));
+            if (member == null)
             {
-                Session["MemberId"] = loginMember.MemberId;
-                return RedirectToAction("I")
+                return null;
+            }
+            string hashedPassword = _passwordHash.HashPassword(loginDto.Password);
+            if (!member.Password.Equals(hashedPassword))
+            {
+                return null;
             }
 
-
-            return null;
+            return member;
         }
+
+        public Member GetMemberById(string memberId)
+        {
+            return _context.Members.FirstOrDefault(m => m.MemberId.Equals(memberId));
+        }
+
     }
+
 }

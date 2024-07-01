@@ -36,12 +36,14 @@ namespace GowBoard.Controllers
         // Post: Member/Register
         // 회원가입
         [HttpPost]
-        public ActionResult Register(ReqRegisterDTO register)
+
+        public ActionResult Register(ReqRegisterrDTO registerDto)
         {
 
-            var registered = _memberService.RegisterMember(register);
+            var registered = _memberService.RegisterMember(registerDto);
 
-            return Json(new { success= registered.Success, message = registered.Message });
+
+            return Json(new { success = registered.Success, message = registered.Message });
 
         }
 
@@ -51,7 +53,7 @@ namespace GowBoard.Controllers
         public ActionResult DuplicatedCheckId(string memberId)
         {
             var isDuplicate = _memberService.DuplicatedCheckId(memberId);
-            return Json(new { success = isDuplicate.Success, message = isDuplicate.Message});
+            return Json(new { success = isDuplicate.Success, message = isDuplicate.Message });
         }
 
         // POST: MEMBER/DuplicatedCheckNickname
@@ -86,18 +88,38 @@ namespace GowBoard.Controllers
 
         // GET: Member/LogIn
         // 로그인
+
         [HttpGet]
         public ActionResult LogIn()
         {
             return View();
         }
 
-        // POST: Member/Login
+
+        // POST: Member/LogIn
+        // 로그인
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogIn(ReqLoginDTO member) 
+        public ActionResult LogIn(reqLoginDto loginDto)
         {
-            return View(member);
+            var member = _memberService.Login(loginDto);
+            if (member == null)
+            {
+                ViewBag.ErrorMessage = "입력하신 아이디 혹은 비밀번호가 올바르지않습니다.";
+                return View("Login", loginDto);
+            }
+
+            Session["MemberId"] = member.MemberId;
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        // GET: Member/LogOut
+        // 로그아웃
+        public ActionResult LogOut()
+        {
+            Session.Remove("MemberId");
+            return RedirectToAction("LogIn", "Member");
+
         }
 
         // GET: Member/FindId
