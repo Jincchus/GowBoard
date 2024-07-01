@@ -36,12 +36,12 @@ namespace GowBoard.Controllers
         // Post: Member/Register
         // 회원가입
         [HttpPost]
-        public ActionResult Register(ReqMemberDTO member)
+        public ActionResult Register(ReqRegisterrDTO registerDto)
         {
 
-            var registered = _memberService.RegisterMember(member);
+            var registered = _memberService.RegisterMember(registerDto);
 
-            return Json(new { success= registered.Success, message = registered.Message });
+            return Json(new { success = registered.Success, message = registered.Message });
 
         }
 
@@ -51,7 +51,7 @@ namespace GowBoard.Controllers
         public ActionResult DuplicatedCheckId(string memberId)
         {
             var isDuplicate = _memberService.DuplicatedCheckId(memberId);
-            return Json(new { success = isDuplicate.Success, message = isDuplicate.Message});
+            return Json(new { success = isDuplicate.Success, message = isDuplicate.Message });
         }
 
         // POST: MEMBER/DuplicatedCheckNickname
@@ -63,13 +63,6 @@ namespace GowBoard.Controllers
             return Json(new { success = isDuplicate.Success, message = isDuplicate.Message });
         }
 
-        // GET: Member/LogIn
-        // 로그인
-        public ActionResult LogIn()
-        {
-            return View();
-        }
-
         // POST: Member/SendAuthenticationEmail
         // 이메일 인증번호 전송
         public ActionResult SendAuthenticationEmail(string email)
@@ -79,7 +72,7 @@ namespace GowBoard.Controllers
             var isDuplicate = _memberService.DuplicatedCheckEmail(email);
             if (!isDuplicate.Success)
             {
-                return Json(new {success = isDuplicate.Success, message = isDuplicate.Message});
+                return Json(new { success = isDuplicate.Success, message = isDuplicate.Message });
             }
 
             var result = _memberService.SendAuthenticationEmail(email);
@@ -90,20 +83,37 @@ namespace GowBoard.Controllers
             return Json(new { success = emailSent, authNumber = authNumber });
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult LogIn(Member member) 
-        //{
-        //    var logInMember = _db.Members.FirstOrDefault(u => u.MemberId == member.MemberId && u.Password == member.Password);
-        //    if (logInMember != null)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
+        // GET: Member/LogIn
+        // 로그인
+        public ActionResult LogIn()
+        {
+            return View();
+        }
 
-        //    ModelState.AddModelError("", "Invalid username or password");
-        //    return View(member);
-        //}
+        // POST: Member/LogIn
+        // 로그인
+        [HttpPost]
+        public ActionResult LogIn(reqLoginDto loginDto)
+        {
+            var member = _memberService.Login(loginDto);
+            if (member == null)
+            {
+                ViewBag.ErrorMessage = "입력하신 아이디 혹은 비밀번호가 올바르지않습니다.";
+                return View("Login", loginDto);
+            }
 
+            Session["MemberId"] = member.MemberId;
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        // GET: Member/LogOut
+        // 로그아웃
+        public ActionResult LogOut()
+        {
+            Session.Remove("MemberId");
+            return RedirectToAction("LogIn", "Member");
+        }
 
         // GET: Member/FindId
         // 아이디 찾기

@@ -1307,3 +1307,8 @@ section {
     transition: 0.4s;
     cursor: pointer;
 }
+
+#Profile-icon{
+    width: 100px !important;
+    height: 100px !importnat;
+}

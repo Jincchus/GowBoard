@@ -5,7 +5,7 @@ using System.Web;
 
 namespace GowBoard.Models.DTO.RequestDTO
 {
-    public class ReqMemberDTO
+    public class ReqRegisterrDTO
     {
         public string Memberid { get; set; }
         public string Password { get; set; }

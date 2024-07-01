@@ -73,6 +73,7 @@ emailAuthenticationBtn.addEventListener("click", function () {
                     if (remainingTime <= 0) {
                         clearInterval(timerInterval);
                         checkNum.placeholder = "시간 초과";
+                        checkNum.disabled = true;
                     } else {
                         const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
                         const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
